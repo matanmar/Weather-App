@@ -1,38 +1,310 @@
 .App {
   text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
   color: #61dafb;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 5rem;
+  background-color: #7079f5;
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 10%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+  z-index: 10;
+  font-family: "Times New Roman", Times, serif;
+}
+.links {
+  margin-right: 20rem;
+}
+
+.links ul {
+  list-style-type: none;
+  font-size: large;
+  font-weight: bold;
+  margin-left: 15rem;
+}
+
+.links li {
+  display: inline;
+  margin-left: 2rem;
+}
+
+.links a {
+  color: white;
+}
+
+.links a:hover {
+  color: rgb(20, 220, 66);
+}
+
+.links a:link {
+  text-decoration: none;
+  font-size: X-large;
+  font-weight: 400;
+  margin-left: 0.5rem;
+}
+.link a {
+  color: white;
+}
+.link a:link {
+  text-decoration: none;
+}
+
+.homepage {
+  margin-top: 6rem;
+  margin-left: 30%;
+}
+.span {
+  font-size: large;
+  font-weight: bold;
+  margin: 1rem;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.weather-container {
+  color: rgb(255, 255, 255);
+  font-size: xx-large;
+  width: 50%;
+  text-align: center;
+  background-color: #7981e9;
+  padding: 20px 0;
+  font-family: "Times New Roman", Times, serif;
+  border-radius: 50px;
+}
+
+.error {
+  font-size: x-large;
+  color: rgb(255, 255, 255);
+  text-align: center;
+  background-color: rgb(248, 110, 110);
+  margin-top: 100px;
+  width: 30%;
+  margin-left: 35%;
+  border-radius: 25px;
+  padding: 20px;
+}
+
+.search {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-top: 100px;
+  height: 30px;
+}
+
+.search > input[type="text"] {
+  font-size: x-large;
+  background-color: antiquewhite;
+  /* border-radius: 50px; */
+  width: 30%;
+  padding: 12px 20px;
+
+  box-sizing: border-box;
+}
+
+.button {
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: #da80e5;
+  color: white;
+  padding: 0.25rem 3rem;
+  align-items: center;
+  font-weight: bold;
+}
+
+.button:hover,
+.button:active {
+  background-color: #07cff2;
+}
+
+.button--chart {
+  margin: auto;
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: #565757;
+  color: white;
+  padding: 0.75rem 3rem;
+  display: inline;
+  align-items: center;
+
+  font-weight: bold;
+}
+
+.active-button {
+  margin: auto;
+  cursor: pointer;
+  font: inherit;
+  border: none;
+  background-color: #cccccc;
+  color: white;
+  padding: 0.75rem 3rem;
+  display: inline;
+  align-items: center;
+
+  font-weight: bold;
+}
+
+.button--chart:hover,
+.button--chart:active {
+  background-color: #cccccc;
+}
+
+.buttons {
+  text-align: center;
+}
+
+.city {
+  text-align: center;
+  font-size: 70px;
+  font-weight: 600;
+  padding-bottom: 10px;
+  color: rgb(0, 0, 0);
+  font-family: "Times New Roman", Times, serif;
+}
+.temp {
+  margin: 0.5rem;
+
+  display: block;
+  font-size: 20px;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.temp-block {
+  margin: 0 auto;
+  display: block;
+  float: none;
+  margin-top: 25px;
+}
+
+.week-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 10px;
+  width: 15%;
+  height: 30%;
+  color: #fff;
+
+  -webkit-box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background-color: #7981e9;
+}
+
+/* .week-list > li {
+  float: left;
+  padding: 15px;
+  cursor: pointer;
+  -webkit-transition: 200ms ease;
+  -o-transition: 200ms ease;
+  transition: 200ms ease;
+  border-radius: 10px;
+} */
+
+.week-list > li:hover {
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
+  background: #fff;
+  color: #222831;
+  -webkit-box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 0 40px -5px rgba(0, 0, 0, 0.2);
+}
+
+.week-list > li.active {
+  background: #fff;
+  color: #222831;
+  border-radius: 10px;
+}
+
+.actions {
+  text-align: right;
+}
+
+.actions button {
+  font: inherit;
+  cursor: pointer;
+  background-color: blue;
+  border: 1px solid #8a2b06;
+  padding: 0.5rem 2rem;
+  border-radius: 25px;
+  margin-left: 1rem;
+  color: #fff;
+  font-weight: 500;
+  font-family: "Times New Roman", Times, serif;
+}
+
+.actions button:hover,
+.actions button:active {
+  background-color: #5a1a01;
+  border-color: #5a1a01;
+  color: white;
+}
+
+.actions .button--alt {
+  color: #8a2b06;
+}
+
+.actions .button {
+  background-color: #8a2b06;
+  color: white;
+}
+
+.modal-week-list {
+  list-style-type: none;
+  text-align: center;
+  margin: 1rem;
+  padding: 0;
+  width: 50%;
+  height: 3rem;
+
+  -webkit-box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+  box-shadow: 0 0 50px -5px rgba(0, 0, 0, 0.25);
+  border-radius: 10px;
+  background: rgb(10, 211, 247);
+}
+
+.day {
+  margin: 0.5rem;
+  margin-bottom: 1.5rem;
+
+  display: block;
+  font-size: 26px;
+  font-family: "Times New Roman", Times, serif;
+  font-weight: 300;
+}
+
+.h3 {
+  font-family: "Times New Roman", Times, serif;
+  font-size: xx-large;
+}
+
+.daysGapFromTop {
+  margin-top: 8rem;
+  /* display: flex; */
+}
+.weather-item {
+  display: flex;
+  justify-content: center;
+}
+
+.chart {
+  margin: auto;
+  margin-top: 2rem;
+  width: 850px;
+  background-color: #fff;
+}
+.legened {
+  text-align: center;
+  background-color: #ffffff;
+  margin: auto;
+  width: 400px;
 }
