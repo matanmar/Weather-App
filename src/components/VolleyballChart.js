@@ -17,9 +17,15 @@ const VolleyballChartLine = (props) => {
     (mov) => days[new Date(mov.dt_txt).getDay()]
   );
 
+  chartLabel.push(
+    days[(new Date(props.data.weatherList[4].dt_txt).getDay() + 1) % 7]
+  ); // adding 1 more day to be able to see the last day paint
+
   const chartData = props.data.weatherList.map((mov) =>
     Math.round(+mov.wind.speed * 3.6)
   );
+
+  chartData.push(Math.round(props.data.weatherList[4].wind.speed * 3.6));
 
   const maxChartValue = props.type === "pop" ? 100 : Math.max(...chartData) + 3;
   const minChartValue = props.type === "pop" ? 0 : Math.min(...chartData) - 3;

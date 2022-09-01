@@ -1,4 +1,5 @@
 import React, { useRef } from "react";
+import { BiSearchAlt } from "react-icons/bi";
 
 const Search = (props) => {
   const cityNameRef = useRef("");
@@ -14,7 +15,7 @@ const Search = (props) => {
     <form className="search">
       <input type="text" placeholder="Enter city name..." ref={cityNameRef} />
       <button className="button" type="submit" onClick={submitCityHandler}>
-        Search
+        <BiSearchAlt style={{ fontSize: "xx-large" }} />
       </button>
     </form>
   );

@@ -169,11 +169,13 @@ function App() {
     // check if can add here a portal  so the hourly data will pop over
     setShow(true);
 
+    const date = data[0].dt_txt.slice(0, 10).split("-").reverse().join("/");
+
     content = (
       <Modal onClose={closeModal}>
         <div>
+          <h3 className="h3">{`Hourly forecast ${date}`}</h3>
           <ul className="weather-item-daily">
-            <h3 className="h3">Hourly forecast</h3>
             {data.map((mov) => (
               <li className="modal-week-list" key={mov.dt}>
                 <div className="temp">

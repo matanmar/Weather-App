@@ -96,12 +96,14 @@ const Next5Days = (props) => {
         <div className="daysGapFromTop">
           {loading && <LoadingSpinner />}
           {check && (
-            <nav>
+            <nav className="weather-days-container">
               <div className="city"> {weekWeather.data.city.name}</div>
               <ul className="weather-item">
                 {weekWeather.weatherList.map((mov, index) => (
                   <li
-                    className="week-list"
+                    className={
+                      index === 0 ? "week-list" : "week-list list-border "
+                    }
                     key={mov.dt}
                     onClick={props.onShowHourlyWeather.bind(
                       null,
