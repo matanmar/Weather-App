@@ -1,6 +1,8 @@
 import React, { Fragment, useEffect, useState } from "react";
 import ChartLine from "./Chart";
 import LoadingSpinner from "../UI/LoadingSpinner";
+import CoverImg from "../images/sunset.jpg";
+import getIcon from "../helpres/getIcon";
 
 const Next5Days = (props) => {
   const [weekWeather, setWeekWeather] = useState({});
@@ -9,6 +11,7 @@ const Next5Days = (props) => {
   const [showWindChart, setShowWindChart] = useState(false);
   const [showPopChart, setShowPopChart] = useState(false);
   const [loading, setLoading] = useState(false);
+  const currentLocationTimeZone = props.timezone;
 
   const days = [
     "Sunday",
@@ -42,9 +45,35 @@ const Next5Days = (props) => {
 
         const weatherData = await response.json();
 
+        // changing time to be for each city per timezone
+        weatherData.list.forEach((mov) => {
+          let temp;
+          if (weatherData.city.timezone === currentLocationTimeZone)
+            temp = mov.dt * 1000; // if timezone is
+          else
+            temp =
+              mov.dt * 1000 +
+              weatherData.city.timezone * 1000 -
+              currentLocationTimeZone * 1000;
+          // mov.dt = temp;
+          mov.dt_txt = new Date(temp).toString();
+        });
+
+        // Sun Sep 04 2022 06:00:00 GMT+0300 (Israel Daylight Time) {}
+        // console.log(weatherData);
+
+        // filtered 5 days- 5 results
         const filtered = weatherData.list.filter(
           (_, index) => index === 0 || index % 8 === 0
         );
+
+        // change the 'n' letter in the icon name to be only icons of day time
+        filtered.forEach((mov) => {
+          const temp = mov.weather[0].icon.replace("n", "d");
+          mov.weather[0].icon = temp;
+        });
+
+        // console.log(filtered);
 
         setWeekWeather((pre) => ({
           ...pre,
@@ -58,7 +87,7 @@ const Next5Days = (props) => {
       }
     };
     weatherWeek();
-  }, [props.weather]);
+  }, [props.weather, currentLocationTimeZone]);
 
   const displayTempChartHandler = (e) => {
     setShowTempChart(true);
@@ -90,6 +119,10 @@ const Next5Days = (props) => {
     document.getElementById("button-wind").classList.remove("active-button");
   };
 
+  const icon = getIcon(props.weather.img);
+
+  document.body.style.backgroundImage = `url(${CoverImg})`;
+
   return (
     <Fragment>
       {!props.error.hasError && (
@@ -111,7 +144,10 @@ const Next5Days = (props) => {
                     )}
                   >
                     <div className="day">
-                      {days[new Date(mov.dt_txt).getDay()]}
+                      {days[new Date(mov.dt_txt).getDay()]}{" "}
+                      <div className="date">
+                        {mov.dt_txt.slice(4, 10).split("-").reverse().join("/")}
+                      </div>
                     </div>
                     <div className="temp">
                       Temp: {mov.main.temp.toFixed(0) - 273 + " ℃"}
@@ -119,10 +155,10 @@ const Next5Days = (props) => {
                     <div className="temp">
                       Humidity: {mov.main.humidity + "%"}
                     </div>
-                    <div className="temp">
-                      Date:
-                      {mov.dt_txt.slice(0, 10).split("-").reverse().join("/")}
-                    </div>
+                    <img
+                      src={getIcon(mov.weather[0].icon)}
+                      alt={`weather img: ${props.weather.description}`}
+                    />
                   </li>
                 ))}
               </ul>

@@ -58,8 +58,10 @@
 }
 
 .homepage {
+  display: flex;
+  justify-content: center;
+
   margin-top: 6rem;
-  margin-left: 30%;
 }
 .span {
   font-size: large;
@@ -69,11 +71,11 @@
 }
 
 .weather-container {
-  color: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
   font-size: xx-large;
-  width: 50%;
+  width: 35%;
   text-align: center;
-  background-color: #7981e9;
+  background-color: #fffbfb;
   padding: 20px 0;
   font-family: "Times New Roman", Times, serif;
   border-radius: 50px;
@@ -160,7 +162,6 @@
 }
 .temp {
   margin: 0.5rem;
-
   display: block;
   font-size: 20px;
   font-family: "Times New Roman", Times, serif;
@@ -274,10 +275,12 @@
 }
 
 .modal-week-list {
+  display: flex;
+  justify-content: space-evenly;
   color: white;
   list-style-type: none;
   text-align: center;
-  margin: 2rem;
+  margin: 0.5rem;
   width: 90%;
   height: 3rem;
   border-bottom: 1px solid rgb(233, 233, 233);
@@ -291,6 +294,10 @@
   font-size: 26px;
   font-family: "Times New Roman", Times, serif;
   font-weight: 300;
+}
+.date {
+  margin-top: 10px;
+  font-size: 20px;
 }
 
 .h3 {

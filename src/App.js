@@ -7,6 +7,8 @@ import Search from "./components/Search";
 import CurrentCity from "./components/CurrentCity";
 import Modal from "./UI/Modal";
 import Volleyball from "./components/Volleyball";
+import CoverImg from "./images/sunset.jpg";
+import getIcon from "./helpres/getIcon";
 
 let content;
 
@@ -18,6 +20,7 @@ function App() {
   });
   const [show, setShow] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [timezone, setTimezone] = useState(null);
 
   // function that excuting if succeded to find location
   const findPosition = async (position) => {
@@ -53,7 +56,10 @@ function App() {
         humidity: weatherData.main.humidity.toFixed(0),
         wind: weatherData.wind.speed.toFixed(0),
         description: weatherData.weather[0].description,
+        img: weatherData.weather[0].icon,
+        timezone: weatherData.timezone,
       };
+      setTimezone(weatherData.timezone);
       setIsLoading(false);
       setWeather(weatherDisplay);
     } catch (error) {
@@ -146,6 +152,9 @@ function App() {
         humidity: weatherData.main.humidity.toFixed(0),
         wind: weatherData.wind.speed.toFixed(0),
         description: weatherData.weather[0].description,
+        img: weatherData.weather[0].icon,
+        time: weatherData.dt,
+        timezone: weather.timezone,
       };
 
       document.body.style.backgroundImage =
@@ -156,7 +165,6 @@ function App() {
     } catch (error) {
       console.log(`${error}💥💥`);
       setError({ hasError: true, errorMessage: error });
-      // `Data ${response.statusText}, try again.`
     }
   };
 
@@ -179,9 +187,16 @@ function App() {
             {data.map((mov) => (
               <li className="modal-week-list" key={mov.dt}>
                 <div className="temp">
-                  Temp: {mov.main.temp.toFixed(0) - 273 + " ℃"} Hour:
-                  {mov.dt_txt.slice(10, 16)}
+                  Temp: {mov.main.temp.toFixed(0) - 273 + " ℃"} Hour:{" "}
+                  {mov.dt_txt.slice(16, 21)}
                 </div>
+                <img
+                  style={{ marginBottom: "1rem" }}
+                  width="60"
+                  height="60"
+                  src={getIcon(mov.weather[0].icon)}
+                  alt={`weather img: ${mov.weather.description}`}
+                />
               </li>
             ))}
           </ul>
@@ -195,6 +210,8 @@ function App() {
     );
   };
 
+  document.body.style.backgroundImage = `url(${CoverImg})`;
+
   return (
     <Fragment>
       {show && content}
@@ -205,6 +222,7 @@ function App() {
           path="/"
           element={
             <CurrentCity
+              st
               weather={weather}
               cityWeather={weatherPerCity}
               error={error}
@@ -213,10 +231,11 @@ function App() {
           }
         />
         <Route
-          path="/next7days"
+          path="/next5days"
           excat
           element={
             <Next5Days
+              timezone={timezone}
               weather={weather}
               onShowHourlyWeather={showHourlyWeather}
               error={error}

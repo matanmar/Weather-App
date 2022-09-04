@@ -1,8 +1,14 @@
 import React, { Fragment } from "react";
 import LoadingSpinner from "../UI/LoadingSpinner";
-
+import getIcon from "../helpres/getIcon";
+import CoverImg from "../images/sunset.jpg";
 // renders the weather detailes
 const CurrentCity = (props) => {
+  // get the icon from function
+
+  const icon = getIcon(props.weather.img);
+
+  document.body.style.backgroundImage = `url(${CoverImg})`;
   return (
     <Fragment>
       {!props.error.hasError && (
@@ -17,6 +23,10 @@ const CurrentCity = (props) => {
                 <div>Humidity: {props.weather.humidity + "%"} </div>
                 <div>Wind: {+props.weather.wind * 3.6 + " km/hr"}</div>
                 <div>{props.weather.description}</div>
+                <img
+                  src={icon}
+                  alt={`weather img: ${props.weather.description}`}
+                />
               </Fragment>
             )}
           </div>

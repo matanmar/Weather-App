@@ -1,6 +1,7 @@
 import React, { Fragment, useEffect, useState } from "react";
 import VolleyballChartLine from "./VolleyballChart";
 import LoadingSpinner from "../UI/LoadingSpinner";
+import CoverImg from "../images/volleyball.jpg";
 
 const Volleyball = (props) => {
   const [weekWeather, setWeekWeather] = useState({});
@@ -48,6 +49,7 @@ const Volleyball = (props) => {
     weatherWeek();
   }, [props.weather]);
 
+  document.body.style.backgroundImage = `url(${CoverImg})`;
   return (
     <Fragment>
       <div className="daysGapFromTop">

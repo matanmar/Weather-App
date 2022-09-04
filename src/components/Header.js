@@ -15,7 +15,7 @@ const Header = (props) => {
           </Link>
         </h1>
         <div className="links">
-          <NavLink to="/next7days">Next 5 days</NavLink>
+          <NavLink to="/next5days">Next 5 days</NavLink>
           <span className="span">|</span>
           <NavLink to="/volleyball">
             Volleyball <FaVolleyballBall />
