@@ -119,8 +119,6 @@ const Next5Days = (props) => {
     document.getElementById("button-wind").classList.remove("active-button");
   };
 
-  const icon = getIcon(props.weather.img);
-
   document.body.style.backgroundImage = `url(${CoverImg})`;
 
   return (
